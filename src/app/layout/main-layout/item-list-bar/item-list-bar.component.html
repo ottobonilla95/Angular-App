@@ -1,0 +1,23 @@
+<mat-accordion>
+  <mat-expansion-panel [ngStyle]="style">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ menuitem.text }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="menuitem.children.length > 0; else elseTemplate">
+      <app-item-list-bar
+        *ngFor="let child of menuitem.children"
+        [menuitem]="child"
+      ></app-item-list-bar>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <mat-action-list *ngIf="menuitem.action" [ngStyle]="styleLink">
+        <button mat-list-item [routerLink]="[menuitem.action]">
+          <mat-icon>{{ menuitem.icon }}</mat-icon> {{ menuitem.text }}
+        </button>
+      </mat-action-list>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

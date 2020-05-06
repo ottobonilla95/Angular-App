@@ -1,0 +1,27 @@
+<mat-sidenav-container class="side-container">
+  <mat-sidenav mode="side" opened style="min-width: 250px;">
+    <div class="top-items">
+    <img *ngIf="!user.profileImage" src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" width="200px"/>
+    <img *ngIf="user.profileImage" src={{user.profileImage}} width="200px"/>
+      <h3>
+        {{user.username}}
+      </h3>
+    </div>
+
+    <app-item-list-bar
+      *ngFor="let menuitem of finalMenu"
+      [menuitem]="menuitem"
+    ></app-item-list-bar>
+
+    <div class="bottom-items">
+      <mat-action-list>
+        <button mat-list-item (click)="logOut()"><mat-icon>exit_to_app</mat-icon> Log Out</button>
+      </mat-action-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

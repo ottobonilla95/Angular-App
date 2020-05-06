@@ -1,0 +1,58 @@
+<div class="main-container">
+  <div class="login-container">
+    <h2>Login</h2>
+    <br />
+
+    <form class="example-form" [formGroup]="loginForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Username Or Email</mat-label>
+        <input
+          matInput
+          placeholder="Username Or Email"
+          formControlName="username"
+        />
+        <mat-error *ngIf="loginForm.controls.username.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <a
+        routerLink="/recoverpassword"
+        style="text-decoration: none; display: block;"
+        >Forgot passowrd?</a
+      >
+
+      <div style="text-align: right;">
+        <button
+          type="button"
+          mat-raised-button
+          routerLink="/register"
+          style="margin-right: 10px;"
+        >
+          Create an account
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          (click)="logIn()"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

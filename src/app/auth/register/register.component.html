@@ -1,0 +1,74 @@
+<div class="main-container">
+  <div class="login-container">
+    <h2>Register</h2>
+    <br />
+
+    <form class="example-form" [formGroup]="registerform">
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username" />
+        <mat-error *ngIf="registerform.controls.username.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="registerform.controls.email.hasError('required')">
+          This field is required
+        </mat-error>
+        <mat-error *ngIf="registerform.controls.email.hasError('email')">
+          Invalid email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="registerform.controls.password.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          placeholder="Confirm Password"
+          type="password"
+          formControlName="confirmpassword"
+        />
+
+        <mat-error *ngIf="registerform.controls.password.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="registerform.errors && registerform.errors.mismatch">
+        The password doesn't match
+      </mat-error>
+
+      <div style="text-align: right;">
+        <button
+          type="button"
+          mat-raised-button
+          color="basic"
+          style="margin-right: 5px;"
+          [routerLink]="['/login']"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          (click)="register()"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
