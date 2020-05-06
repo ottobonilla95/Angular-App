@@ -1,3 +1,5 @@
+## Still in development ! 
+
 ![Angular](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/250px-Angular_full_color_logo.svg.png)
 
 ## Description
@@ -10,7 +12,7 @@ Features:
 
 
 ## Demo
-To see the full demo click here [Here](http://128.199.43.48/playapp_webapp/login).
+To see the preview demo click here [Here](http://128.199.43.48/playapp_webapp/login).
 
 
 ## BackEnd API
