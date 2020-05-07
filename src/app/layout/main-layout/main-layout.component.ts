@@ -4,13 +4,15 @@ import { MenuItem } from "src/app/core/models/menuitem.model";
 import { AuthService } from "src/app/core/services/Auth.service";
 import { User } from "src/app/core/models/user.model";
 
+import * as _ from "lodash";
+
 @Component({
   selector: "app-main-layout",
   templateUrl: "./main-layout.component.html",
   styleUrls: ["./main-layout.component.scss"],
 })
 export class MainLayoutComponent {
-  finalMenu: any[] = [];
+  finalMenu: MenuItem[] = [];
   menuLoaded: Boolean;
   user: User;
 
@@ -45,7 +47,21 @@ export class MainLayoutComponent {
         }
       });
     }
+    this.finalMenu = this.sortItems(this.finalMenu);
+
     this.menuLoaded = true;
+  }
+
+  sortItems(menu: MenuItem[]) {
+    if (menu.length > 0) {
+      menu = _.sortBy(menu, ["sequence"]);
+
+      menu.forEach((menuItem) => {
+        menuItem.children = this.sortItems(menuItem.children);
+      });
+    }
+
+    return menu;
   }
 
   serachFather(menuArray: MenuItem[], father, menuItem: MenuItem, menu) {

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-root",
@@ -7,7 +8,5 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   constructor() {}
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 }

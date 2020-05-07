@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl:'https://localhost:44356/api/'
+  baseUrl:'http://128.199.43.48/playapp_webapi/api/'
+  // baseUrl:'https://localhost:44387/api/'
 };
 
 /*

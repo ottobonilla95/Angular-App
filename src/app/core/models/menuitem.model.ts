@@ -6,4 +6,5 @@ export class MenuItem {
   menuFatherId: string;
   children:any[];
   opacity:any;
+  sequence:string;
 }
