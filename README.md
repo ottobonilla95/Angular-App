@@ -7,6 +7,13 @@ Features:
 
 - JWT Authenticaton.
 - Angular Material.
+- ngrx/store
+- ngx-image-cropper
+- ngx-ui-loader
+- sweetalert2
+- moment
+- lodash
+- SoundCloud Widget Api
 
 
 ## Demo
