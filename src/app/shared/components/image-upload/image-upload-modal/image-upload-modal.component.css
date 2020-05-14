@@ -1,0 +1,13 @@
+.button-container {
+  text-align: right;
+}
+
+.crop-container {
+  max-width: 500px;
+}
+
+.crop-container .button-container {
+  text-align: right;
+  display: block;
+  margin-top: 10px;
+}

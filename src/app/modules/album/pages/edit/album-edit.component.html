@@ -1,0 +1,12 @@
+<h1>
+  Album
+</h1>
+
+<hr />
+
+<app-album-form
+  *ngIf="album != undefined"
+  (onSubmit)="editAlbum($event)"
+  [albumData]="album"
+  [loading]="loading"
+></app-album-form>

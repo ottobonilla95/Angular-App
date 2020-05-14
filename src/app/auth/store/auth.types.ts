@@ -1,0 +1,1 @@
+export const LOGIN_FINISHED = "[AUTH] LOGIN_FINISHED";

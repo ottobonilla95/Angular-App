@@ -1,0 +1,17 @@
+<button
+  type="button"
+  mat-flat-button
+  color="accent"
+  (click)="openModal()"
+  [disabled]="loading"
+>
+  {{buttonText}}
+</button>
+
+<img [src]="croppedImage" class="img-preview" *ngIf="savedImage" />
+
+<img
+  [src]="previewImage"
+  class="img-preview"
+  *ngIf="previewImage && croppedImage == undefined"
+/>

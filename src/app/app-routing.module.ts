@@ -5,14 +5,17 @@ import { NotFoundComponent } from "./layout/not-found/not-found.component";
 import { MainLayoutComponent } from "./layout/main-layout/main-layout.component";
 
 import { LoginComponent } from "./auth/login/login.component";
-import { RegisterComponent } from './auth/register/register.component';
-import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
+import { RegisterComponent } from "./auth/register/register.component";
+import { RecoverPasswordComponent } from "./auth/recover-password/recover-password.component";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 const routes: Route[] = [
   {
     path: "",
+    canActivate: [AuthGuard],
     component: MainLayoutComponent,
     children: [
+      { path: "profile", loadChildren: "./modules/profile/profile.module#ProfileModule" },
       { path: "home", loadChildren: "./modules/home/home.module#HomeModule" },
       {
         path: "album",

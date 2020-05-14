@@ -1,0 +1,30 @@
+.profile-form {
+  width: 100%;
+}
+
+.profile-input {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  display: block;
+}
+
+.button-container {
+  text-align: right;
+}
+
+.crop-container {
+  max-width: 500px;
+}
+
+.crop-container .button-container {
+  text-align: right;
+  display: block;
+  margin-top: 10px;
+}
+
+.crop-container img {
+  max-width: 200px;
+  border-radius: 5px;
+  margin-top: 10px;
+}

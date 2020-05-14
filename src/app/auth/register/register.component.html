@@ -1,17 +1,17 @@
-<div class="main-container">
+<div class="login-main-container">
   <div class="login-container">
     <h2>Register</h2>
     <br />
 
-    <form class="example-form" [formGroup]="registerform">
-      <mat-form-field class="example-full-width">
+    <form class="login-form" [formGroup]="registerform">
+      <mat-form-field class="login-full-width">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Username" formControlName="username" />
         <mat-error *ngIf="registerform.controls.username.hasError('required')">
           This field is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="login-full-width">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email" />
         <mat-error *ngIf="registerform.controls.email.hasError('required')">
@@ -21,7 +21,7 @@
           Invalid email
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="login-full-width">
         <mat-label>Password</mat-label>
         <input
           matInput
@@ -33,7 +33,7 @@
           This field is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="login-full-width">
         <mat-label>Confirm Password</mat-label>
         <input
           matInput

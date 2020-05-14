@@ -2,9 +2,16 @@ import { Component } from "@angular/core";
 import { PlayAppService } from "src/app/core/services/PlayApp.service";
 import { MenuItem } from "src/app/core/models/menuitem.model";
 import { AuthService } from "src/app/core/services/Auth.service";
-import { User } from "src/app/core/models/user.model";
+import { UserToken } from "src/app/core/models/user.model";
 
 import * as _ from "lodash";
+
+import { Store } from "@ngrx/store";
+import * as reducers from "../../store/app.reducer";
+import * as profileActions from "../../modules/profile/store/profile.actions";
+
+import { UserProfile } from "src/app/shared/models/user-profile.model";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-main-layout",
@@ -13,18 +20,28 @@ import * as _ from "lodash";
 })
 export class MainLayoutComponent {
   finalMenu: MenuItem[] = [];
-  menuLoaded: Boolean;
-  user: User;
+  user: UserToken;
+  userProfile: UserProfile;
 
   constructor(
     private playAppService: PlayAppService,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<reducers.AppState>
   ) {}
 
   ngOnInit(): void {
     this.playAppService.getMenu().subscribe((response) => {
       this.renderMenu(response);
     });
+
+    this.store.select("profile").subscribe((profile) => {
+      this.userProfile = profile.userProfile;
+    });
+
+    this.playAppService.getUser().subscribe((response) => {
+      this.store.dispatch(new profileActions.LoadProfile(response));
+    });
+
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
@@ -48,8 +65,6 @@ export class MainLayoutComponent {
       });
     }
     this.finalMenu = this.sortItems(this.finalMenu);
-
-    this.menuLoaded = true;
   }
 
   sortItems(menu: MenuItem[]) {

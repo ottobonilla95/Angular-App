@@ -2,24 +2,45 @@
   Album
 </h1>
 
-<mat-card class="card-content" *ngFor="let album of albums">
-  <mat-card-header>
-    <div mat-card-avatar class="card-header-image"></div>
-    <mat-card-title>{{album.name}}</mat-card-title>
-    <mat-card-subtitle>{{album.creationDate  }}</mat-card-subtitle>
-  </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
-  <mat-card-content>
-    <p>
-        {{album.description}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <!-- <button mat-button>SHARE</button> -->
-  </mat-card-actions>
-</mat-card>
+<mat-tab-group>
+  <mat-tab label="All">
+    <ng-template matTabContent>
+      <br />
+      <div class="album-grid">
+        <app-album-item
+          *ngFor="let album of albums"
+          [album]="album"
+          [routerLink]="['/album/detail', album?.id]"
+        ></app-album-item>
+      </div>
+
+      <div *ngIf="albums.length === 0" class="message-info">
+        No albums !
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Own">
+    <ng-template matTabContent>
+      <div style="text-align: right; overflow: hidden;">
+        <br>
+        <button mat-flat-button color="primary" routerLink="/album/new">
+          <mat-icon>add</mat-icon>
+          New
+        </button>
+      </div>
+
+      <br />
+      <div class="album-grid">
+        <app-album-item
+          *ngFor="let album of ownAlbums"
+          [album]="album"
+          [routerLink]="['/album/detail', album?.id]"
+        ></app-album-item>
+      </div>
+
+      <div *ngIf="albums.length === 0" class="message-info">
+        No albums !
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

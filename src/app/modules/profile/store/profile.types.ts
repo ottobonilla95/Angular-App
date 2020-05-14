@@ -1,0 +1,3 @@
+export const LOAD_PROFILE = "[PROFILE] LOAD_PROFILE";
+export const INIT_LOADER = "[PROFILE] INIT_LOADER";
+export const STOP_LOADER = "[PROFILE] STOP_LOADER";

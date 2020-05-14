@@ -1,6 +1,4 @@
-export class User {
-  username: string;
-  profileImage: string;
+export class UserToken {
   accessToken: string;
   expirationDate: string;
   refreshToken: string;

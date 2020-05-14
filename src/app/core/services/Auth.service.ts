@@ -2,17 +2,26 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-import { User } from "../models/user.model";
+import { UserToken } from "../models/user.model";
 import { Router } from "@angular/router";
+
+///Store
+import * as reducers from "../../store/app.reducer";
+import { Store } from "@ngrx/store";
+import * as albumActions from "../../modules/album/store/album.actions";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private client: HttpClient, private router: Router) {}
+  constructor(
+    private client: HttpClient,
+    private router: Router,
+    private store: Store<reducers.AppState>
+  ) {}
 
-  logIn(username: string, password: string): Observable<User> {
-    return this.client.post<User>(environment.baseUrl + "auth/login", {
+  logIn(username: string, password: string): Observable<UserToken> {
+    return this.client.post<UserToken>(environment.baseUrl + "auth/login", {
       username,
       password,
     });
@@ -22,8 +31,8 @@ export class AuthService {
     username: string,
     email: string,
     password: string
-  ): Observable<User> {
-    return this.client.post<User>(environment.baseUrl + "auth/register", {
+  ): Observable<UserToken> {
+    return this.client.post<UserToken>(environment.baseUrl + "auth/register", {
       username,
       email,
       password,
@@ -37,8 +46,8 @@ export class AuthService {
     );
   }
 
-  refreshToken(refreshToken: string): Observable<User> {
-    return this.client.post<User>(
+  refreshToken(refreshToken: string): Observable<UserToken> {
+    return this.client.post<UserToken>(
       environment.baseUrl + "auth/refresh?refreshToken=" + refreshToken,
       {}
     );
@@ -46,6 +55,8 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem("user");
+
     this.router.navigate(["/login"]);
+    this.store.dispatch(new albumActions.DeleteAll());
   }
 }

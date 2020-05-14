@@ -1,0 +1,43 @@
+<h1>
+  Profile
+</h1>
+
+<hr />
+
+<br />
+<br />
+
+<form class="profile-form" [formGroup]="profileForm">
+  <mat-form-field class="profile-input">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="username" />
+  </mat-form-field>
+
+  <mat-form-field class="profile-input">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" formControlName="email" />
+  </mat-form-field>
+
+  <p>
+    Profile Picture
+  </p>
+  <app-image-upload
+    (onCrop)="saveImage($event)"
+    [previewImage]="user?.profileImage"
+    [loading]="loading"
+    [buttonText]="'Change Profile Image'"
+  ></app-image-upload>
+  <br />
+  <div class="button-container">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveAll()"
+      [disabled]="loading"
+    >
+      Save
+    </button>
+  </div>
+</form>
+
+<mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>

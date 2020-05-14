@@ -1,0 +1,104 @@
+<!-- <form class="form-form" [formGroup]="albumForm" #f (submit)="saveAlbum()"></form> -->
+<div style="display: flex; width: 100%;">
+  <div style="width: 40%; padding-right: 20px;">
+    <form class="form-form" [formGroup]="albumForm" #f (submit)="saveAlbum()">
+      <mat-form-field class="form-input">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="albumForm.controls.name.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-input">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        />
+        <mat-error *ngIf="albumForm.controls.description.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <app-image-upload
+        (onCrop)="saveImage($event)"
+        [previewImage]="albumData?.image"
+        [loading]="loading"
+        [buttonText]="'Select Image'"
+      ></app-image-upload>
+
+      <div style="margin-top: 15px;">
+        <button
+          type="button"
+          mat-raised-button
+          routerLink="/album"
+          [disabled]="loading"
+          style="margin-right: 15px;"
+        >
+          Back
+        </button>
+        <button mat-raised-button color="primary" [disabled]="loading">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="songs-container" *ngIf="albumData != undefined">
+    <div style="display: flex;">
+      <h3>Songs</h3>
+      <div style="width: 100%; text-align: right;">
+        <button
+          type="button"
+          mat-mini-fab
+          (click)="openSongModal()"
+          [disabled]="loading"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div
+      *ngFor="let song of albumData?.songs"
+      style="display: flex; margin-bottom: 10px;"
+    >
+      <iframe
+        style="border-radius: 5px;"
+        width="80%"
+        height="100"
+        scrolling="no"
+        frameborder="no"
+        allow="autoplay"
+        [src]="song.url | safe"
+      >
+      </iframe>
+      <div width="10%" style="margin-right: 5px;">
+        <button
+          type="button"
+          mat-flat-button
+          style="height: 100%;"
+          color="accent"
+          (click)="openSongModal(song)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div width="10%">
+        <button
+          type="button"
+          mat-flat-button
+          style="height: 100%;"
+          color="warn"
+          (click)="deleteSong(song)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+
+<mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>

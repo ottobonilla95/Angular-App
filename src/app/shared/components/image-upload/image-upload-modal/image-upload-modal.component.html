@@ -1,0 +1,85 @@
+<!-- <button
+  type="button"
+  mat-flat-button
+  color="accent"
+  (click)="input.click()"
+  [disabled]="loading"
+>
+  Change Profile Image
+</button>
+
+
+<input
+  #input
+  type="file"
+  style="display: none;"
+  (change)="fileChangeEvent($event)"
+/>
+
+<div class="crop-container" *ngIf="imageChangedEvent != undefined">
+  <image-cropper
+    *ngIf="!savedImage"
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+  <img [src]="croppedImage" class="img-preview" *ngIf="savedImage" />
+  <div class="button-container">
+    <button
+      *ngIf="!savedImage"
+      mat-flat-button
+      type="button"
+      (click)="saveImage()"
+    >
+      Crop Image
+    </button>
+  </div>
+</div>
+
+
+<img
+  [src]="previewImage"
+  style="display: block;"
+  class="img-preview"
+  *ngIf="previewImage && imageChangedEvent == undefined"
+/>
+ -->
+
+<h1 mat-dialog-title>Upload Image</h1>
+<div mat-dialog-content>
+  <input
+    #input
+    type="file"
+    style="display: none;"
+    (change)="fileChangeEvent($event)"
+  />
+</div>
+
+<div class="crop-container" *ngIf="imageChangedEvent != undefined">
+  <image-cropper
+    *ngIf="!savedImage"
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+</div>
+
+<button type="button" mat-flat-button color="accent" (click)="input.click()">
+  Load File
+</button>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="saveImage()" cdkFocusInitial>
+    Ok
+  </button>
+</div>

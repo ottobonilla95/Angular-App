@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Song</h1>
+<div mat-dialog-content>
+  <form class="form" [formGroup]="songForm">
+    <mat-form-field class="form-input">
+      <mat-label>Url</mat-label>
+      <input matInput placeholder="Name" formControlName="url" />
+      <mat-error *ngIf="songForm.controls.url.hasError('required')">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="saveSong()" cdkFocusInitial>
+    Save
+  </button>
+</div>

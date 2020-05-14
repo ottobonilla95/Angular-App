@@ -1,22 +1,37 @@
 <mat-sidenav-container class="side-container">
   <mat-sidenav mode="side" opened style="min-width: 250px;">
     <div class="top-items">
-    <img *ngIf="!user.profileImage" src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" width="200px"/>
-    <img *ngIf="user.profileImage" src={{user.profileImage}} width="200px"/>
+      <div class="profile-container">
+        <img
+          *ngIf="!userProfile?.profileImage"
+          src="assets/images/unknown.png"
+          width="200px"
+        />
+        <img
+          *ngIf="userProfile?.profileImage"
+          src="{{ userProfile?.profileImage }}"
+          width="200px"
+        />
+        
       <h3>
-        {{user.username}}
+        {{ userProfile?.username }}
       </h3>
+        <button  mat-stroked-button routerLink="/profile">Edit profile</button>
+      </div>
+
     </div>
 
     <app-item-list-bar
-    style="overflow: scroll;"
+      style="overflow: scroll;"
       *ngFor="let menuitem of finalMenu"
       [menuitem]="menuitem"
     ></app-item-list-bar>
 
     <div class="bottom-items">
       <mat-action-list>
-        <button mat-list-item (click)="logOut()"><mat-icon>exit_to_app</mat-icon> Log Out</button>
+        <button mat-list-item (click)="logOut()">
+          <mat-icon>exit_to_app</mat-icon> Log Out
+        </button>
       </mat-action-list>
     </div>
   </mat-sidenav>

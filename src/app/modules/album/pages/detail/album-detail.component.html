@@ -1,0 +1,110 @@
+<h1>
+  Album
+</h1>
+
+<hr />
+
+<div style="display: flex; width: 100%;">
+  <div style="width: 40%;">
+    <img [src]="album.image" *ngIf="album?.image != null" class="image-album" />
+    <img
+      src="assets/images/album.jpg"
+      *ngIf="album?.image == null"
+      class="image-album"
+    />
+    <br />
+    <br />
+    <mat-form-field class="form-input">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" disabled [value]="album?.name" />
+    </mat-form-field>
+
+    <mat-form-field class="form-input">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        placeholder="Description"
+        disabled
+        [value]="album?.description"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-input">
+      <mat-label>User</mat-label>
+      <input
+        matInput
+        placeholder="Description"
+        disabled
+        [value]="album?.user?.username"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-input">
+      <mat-label>Creation Date</mat-label>
+      <input
+        matInput
+        placeholder="Description"
+        disabled
+        [value]="album?.creationDate | date"
+      />
+    </mat-form-field>
+
+
+  </div>
+  <div style="width: 60%;">
+    <h3>Songs</h3>
+    <hr />
+
+    <div *ngIf="album?.songs.length === 0" class="message-info">
+      No Songs !
+    </div>
+
+    <div
+      *ngFor="let song of album?.songs"
+      style="display: flex; margin-bottom: 10px;"
+    >
+      <iframe
+        style="border-radius: 5px;"
+        width="100%"
+        height="100"
+        scrolling="no"
+        frameborder="no"
+        allow="autoplay"
+        [src]="song.url | safe"
+      >
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: right;">
+  <button
+    mat-raised-button
+    routerLink="/album"
+    [disabled]="loading"
+    style="margin-right: 15px;"
+  >
+    Back
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="loading"
+    style="margin-right: 15px;"
+    [routerLink]="['/album/edit', album?.id]"
+    *ngIf="mine"
+  >
+    Edit
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    [disabled]="loading"
+    (click)="onDelete()"
+    *ngIf="mine"
+  >
+    Delete
+  </button>
+</div>
+
+<mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>

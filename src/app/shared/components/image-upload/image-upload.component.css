@@ -1,0 +1,20 @@
+.button-container {
+  text-align: right;
+}
+
+.crop-container {
+  max-width: 500px;
+}
+
+.crop-container .button-container {
+  text-align: right;
+  display: block;
+  margin-top: 10px;
+}
+
+.img-preview {
+  max-width: 200px;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: block;
+}

@@ -1,0 +1,34 @@
+<mat-card class="card-content">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      class="example-header-image"
+      [ngStyle]="{
+        'background-image': 'url(' + album?.user?.profileImage + ')'
+      }"
+    ></div>
+    <mat-card-title>{{ album.name }}</mat-card-title>
+    <mat-card-subtitle>{{ album.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    *ngIf="album.image"
+    [src]="album.image"
+    alt="Photo of a Shiba Inu"
+  />
+  <img
+    mat-card-image
+    *ngIf="!album?.image"
+    src="assets/images/album.jpg"
+    alt="Album"
+  />
+  <mat-card-content>
+    <button mat-flat-button>
+      <mat-icon>date_range</mat-icon> {{ album.creationDate | date }}
+    </button>
+
+    <button mat-flat-button>
+      <mat-icon>person</mat-icon> {{ album.user.username }}
+    </button>
+  </mat-card-content>
+</mat-card>
